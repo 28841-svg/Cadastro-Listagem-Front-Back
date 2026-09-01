@@ -157,15 +157,18 @@ export async function cadastrar(nome, email, senha) {
 //  ✅ Deu certo quando: os cards da turma aparecem no mural.
 //  🧪 Teste o erro: apague uma letra do token antes de mandar e veja o 401.
 //
+
 export async function listarUsuarios(token) {
   const resposta = await fetch(`${API_URL}/api/usuarios`, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 
   const dados = await resposta.json();
 
   if (!resposta.ok) {
-    throw new Error(dados.mensagem || "Não foi possível carregar a lista.");
+    throw new Error(dados.mensagem || "Não foi possível listar os usuários.");
   }
 
   return dados.usuarios;
